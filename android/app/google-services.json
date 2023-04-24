@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "623131926292",
+    "project_id": "digifood-c48eb",
+    "storage_bucket": "digifood-c48eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623131926292:android:0a92e1a3480cb11d242c01",
+        "android_client_info": {
+          "package_name": "com.example.digifood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623131926292-lhr15ir51slsj08mlnuv2e3pa5ufhbuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBynjlul4dyyxfS-u15woQ4KRETUMUlycU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623131926292-lhr15ir51slsj08mlnuv2e3pa5ufhbuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
