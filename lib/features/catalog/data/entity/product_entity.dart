@@ -34,7 +34,7 @@ class ProductEntity {
         priceATI: snap.get('priceATI').toDouble() as double,
         priceWT: snap.get('priceWT').toDouble() as double,
         tva: snap.get('tva').toDouble() as double,
-        categories: List<String>.from(snap.get('categories')),
+        categories: List<String>.from(snap.get('category')),
       );
     } catch (e) {
       throw SerializationError();

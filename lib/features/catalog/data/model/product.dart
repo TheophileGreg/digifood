@@ -1,6 +1,7 @@
 import 'package:digifood/features/catalog/data/entity/product_entity.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 
-enum Categories { salt, sugar, food, drink, alcohol, soft }
+enum Categories { salt, sugar, food, drink, alcohol, soft, other }
 
 class Product {
   final String id;
@@ -10,7 +11,7 @@ class Product {
   final double priceATI;
   final double priceWT;
   final double tva;
-  final List<Categories> categories;
+  final List<Categories?> categories;
 
   const Product(
       {required this.id,
@@ -45,10 +46,7 @@ class Product {
       priceATI: entity.priceATI,
       priceWT: entity.priceWT,
       tva: entity.tva,
-      categories: entity.categories
-          .map((category) =>
-              Categories.values.firstWhere((e) => e.toString() == category))
-          .toList(),
+      categories: EnumToString.fromList(Categories.values, entity.categories),
     );
     return product;
   }
@@ -61,7 +59,7 @@ class Product {
     double? priceATI,
     double? priceWT,
     double? tva,
-    List<Categories>? categories,
+    List<Categories?>? categories,
   }) {
     return Product(
       id: id ?? this.id,
