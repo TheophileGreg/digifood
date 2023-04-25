@@ -24,8 +24,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Future<void> removeFromCart(
       RemoveFromCartEvent event, Emitter<CartState> emit) async {
     emit(CartLoading());
-    cartItems.update(event.product, (value) => value > 0 ? value - 1 : 0,
-        ifAbsent: () => 0);
+    cartItems.update(event.product, (value) {
+      if (value > 1) {
+        return value - 1;
+      }
+      return 0;
+    });
+    cartItems.removeWhere((key, value) => value == 0);
     emit(CartLoaded(cartItems));
   }
+
+  // void removeProduct(RemoveFromCartEvent event) {
+  //   cartItems.remove(event.product);
+  // }
 }

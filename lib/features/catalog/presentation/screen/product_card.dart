@@ -14,7 +14,9 @@ class ProductCard extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
         builder: (BuildContext cartContext, CartState cartState) {
       if (cartState is CartLoaded) {
-        // final productInCart = cartState.cartItems.
+        // final List<Product> productInCart =
+
+        // cartState.cartItems.forEach((key, value) { })
         //         .where((element) => element.product.id == product.id)
         //         .isNotEmpty;
 
@@ -49,9 +51,12 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 8,
+              ),
               Text(
                 product.name,
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme.of(context).textTheme.bodyLarge,
                 overflow: TextOverflow.ellipsis,
               ),
               Row(
@@ -59,29 +64,32 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     '${product.priceATI}€',
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Row(children: [
-                    GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          BlocProvider.of<CartBloc>(context)
-                              .add(RemoveFromCartEvent(product));
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              top: 7, bottom: 7, right: 7, left: 7),
-                          height: 25,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              shape: BoxShape.circle),
-                          child: const Icon(
-                            Icons.remove,
-                            color: Colors.white,
-                          ),
-                        )),
-                    //Display le nombre de produit dans le panier
-                    // Text(productWithNb.nbInCart.toString()),
+                    isProductInCart(cartState)
+                        ? GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              BlocProvider.of<CartBloc>(context)
+                                  .add(RemoveFromCartEvent(product));
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  top: 7, bottom: 7, right: 7, left: 7),
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  shape: BoxShape.circle),
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                            ))
+                        : Container(),
+                    isProductInCart(cartState)
+                        ? Text(getNumberProductInCart(cartState))
+                        : Container(),
                     GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
@@ -92,13 +100,8 @@ class ProductCard extends StatelessWidget {
                           margin: const EdgeInsets.only(
                               top: 7, bottom: 7, right: 5, left: 7),
                           height: 25,
-                          // decoration: BoxDecoration(
-                          //     color: productWithNb.inStock &&
-                          //             productWithNb.nbInCart <
-                          //                 productWithNb.product.stock
-                          //         ? Theme.of(context).primaryColor
-                          //         : Colors.grey,
-                          // shape: BoxShape.circle),
+                          decoration: const BoxDecoration(
+                              color: Colors.blue, shape: BoxShape.circle),
                           child: const Icon(
                             Icons.add,
                             color: Colors.white,
@@ -114,5 +117,18 @@ class ProductCard extends StatelessWidget {
       ;
       return Container();
     });
+  }
+
+  String getNumberProductInCart(CartLoaded cartState) {
+    if (cartState.cartItems[product] != null) {
+      return cartState.cartItems[product]!.toString();
+    } else {
+      return '0';
+    }
+  }
+
+  bool isProductInCart(CartLoaded cartState) {
+    return cartState.cartItems[product] != null &&
+        cartState.cartItems[product]! > 0;
   }
 }
