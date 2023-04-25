@@ -8,9 +8,10 @@ part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   Map<Product, int> cartItems = {};
+  double totalPrice = 0;
   CartBloc()
       : super(
-          CartLoaded(const {}),
+          CartLoaded(const {}, 0),
         ) {
     on<AddToCartEvent>(addToCart);
     on<RemoveFromCartEvent>(removeFromCart);
@@ -18,7 +19,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Future<void> addToCart(AddToCartEvent event, Emitter<CartState> emit) async {
     emit(CartLoading());
     cartItems.update(event.product, (value) => value + 1, ifAbsent: () => 1);
-    emit(CartLoaded(cartItems));
+    computePrice(event);
+    emit(CartLoaded(cartItems, totalPrice));
   }
 
   Future<void> removeFromCart(
@@ -31,10 +33,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       return 0;
     });
     cartItems.removeWhere((key, value) => value == 0);
-    emit(CartLoaded(cartItems));
+    computePrice(event);
+    emit(CartLoaded(cartItems, totalPrice));
   }
 
-  // void removeProduct(RemoveFromCartEvent event) {
-  //   cartItems.remove(event.product);
-  // }
+  void computePrice(CartEvent event) {
+    if (event is AddToCartEvent) {
+      totalPrice += event.product.priceATI;
+    } else if (event is RemoveFromCartEvent) {
+      totalPrice -= event.product.priceATI;
+    }
+  }
 }

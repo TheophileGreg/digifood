@@ -9,8 +9,9 @@ class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
   final Map<Product, int> cartItems;
+  final double totalPrice;
 
-  CartLoaded(this.cartItems);
+  CartLoaded(this.cartItems, this.totalPrice);
 
-  List<Object?> get props => [cartItems];
+  List<Object?> get props => [cartItems, totalPrice];
 }

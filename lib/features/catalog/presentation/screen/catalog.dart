@@ -12,7 +12,7 @@ class CatalogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FlutterFood'),
+        title: const Text('FlutterFood'),
       ),
       body: Center(
         child: BlocBuilder<ProductBloc, ProductState>(
@@ -31,16 +31,6 @@ class CatalogPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final product = state.products[index];
                   return ProductCard(product: product);
-                  // ListTile(
-                  //   title: Text(product.name),
-                  //   subtitle: Text(product.categories.first.toString()),
-                  //   trailing: Text(product.priceATI.toString()),
-                  //   leading: GestureDetector(
-                  //     onTap: () => BlocProvider.of<CartBloc>(context)
-                  //         .add(AddToCartEvent(product)),
-                  //     child: const Icon(Icons.add),
-                  //   ),
-                  // );
                 },
               );
             }
@@ -49,12 +39,13 @@ class CatalogPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        //  heroTag: 'sbGhe2JvF59YYwd45g8o',
         onPressed: () {
           context.go('/cart');
         },
         tooltip: 'cart',
         child: const Icon(Icons.shopping_cart),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
     ;
   }

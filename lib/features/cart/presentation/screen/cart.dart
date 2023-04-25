@@ -10,6 +10,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Text('Panier'),
           leading: GestureDetector(
             onTap: () {
               context.go('/');
@@ -22,18 +23,35 @@ class CartPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is CartLoaded) {
-            return ListView.builder(
-              itemCount: state.cartItems.length,
-              itemBuilder: (context, index) {
-                final product = state.cartItems.keys.toList()[index];
-                return ListTile(
-                  title: Text(product.name),
-                  subtitle: Text(product.categories.first.toString()),
-                  trailing: Text(product.priceATI.toString()),
-                  leading:
-                      Text(state.cartItems.values.toList()[index].toString()),
-                );
-              },
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: state.cartItems.length,
+                    itemBuilder: (context, index) {
+                      final product = state.cartItems.keys.toList()[index];
+                      return ListTile(
+                        title: Text(product.name,
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        subtitle: Text(product.categories.first.toString()),
+                        trailing: Text(
+                            "${state.cartItems.values.toList()[index]} x ${product.priceATI.toInt()} €"),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  height: 100,
+                  color: Theme.of(context).cardColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Total : ${state.totalPrice}'),
+                    ],
+                  ),
+                )
+              ],
             );
           }
           return Container();
