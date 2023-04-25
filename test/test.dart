@@ -60,7 +60,7 @@ void main() {
         CartLoading(),
         CartLoaded({product1: 1}, 3),
         CartLoading(),
-        CartLoaded({}, 0)
+        CartLoaded(const {}, 0)
       ],
     );
   });
