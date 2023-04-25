@@ -10,7 +10,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Map<Product, int> cartItems = {};
   CartBloc()
       : super(
-          CartInitial(),
+          CartLoaded(const {}),
         ) {
     on<AddToCartEvent>(addToCart);
     on<RemoveFromCartEvent>(removeFromCart);

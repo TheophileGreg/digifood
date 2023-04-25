@@ -7,7 +7,8 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const CatalogPage(),
+      pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey, child: const CatalogPage()),
     ),
     GoRoute(
       path: '/cart',
