@@ -23,10 +23,11 @@ class CatalogPage extends StatelessWidget {
             if (state is ProductLoaded) {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12),
                 itemCount: state.products.length,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 itemBuilder: (context, index) {
                   final product = state.products[index];
                   return ProductCard(product: product);

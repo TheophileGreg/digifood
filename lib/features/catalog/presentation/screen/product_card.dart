@@ -21,19 +21,18 @@ class ProductCard extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: Theme.of(context).cardColor,
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                  child: Center(
                 child: Hero(
                   tag: product.id,
                   child: CachedNetworkImage(
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.cover,
                     height: 100,
-                    width: 100,
+                    width: double.infinity,
                     progressIndicatorBuilder:
                         (context, string, downloadProgress) {
                       return Shimmer.fromColors(
@@ -49,7 +48,7 @@ class ProductCard extends StatelessWidget {
                     imageUrl: product.imageURL,
                   ),
                 ),
-              )),
+              ),
               Text(
                 product.name,
                 style: Theme.of(context).textTheme.displayMedium,

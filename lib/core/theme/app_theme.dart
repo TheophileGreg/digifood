@@ -4,6 +4,7 @@ ThemeData get lightTheme => ThemeData(
       primaryColor: Colors.red,
       primaryColorLight: Colors.redAccent,
       dividerColor: Colors.grey,
+      cardColor: Colors.grey.shade200,
       fontFamily: 'NouvelR',
       scaffoldBackgroundColor: Colors.white,
       textTheme: const TextTheme(

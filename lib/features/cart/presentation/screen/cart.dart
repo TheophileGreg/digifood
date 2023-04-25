@@ -30,6 +30,8 @@ class CartPage extends StatelessWidget {
                   title: Text(product.name),
                   subtitle: Text(product.categories.first.toString()),
                   trailing: Text(product.priceATI.toString()),
+                  leading:
+                      Text(state.cartItems.values.toList()[index].toString()),
                 );
               },
             );
