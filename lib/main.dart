@@ -1,6 +1,7 @@
 import 'package:digifood/core/navigation/routes.dart';
 import 'package:digifood/core/theme/app_theme.dart';
 import 'package:digifood/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:digifood/features/catalog/data/repository_impl/product_repository_impl.dart';
 import 'package:digifood/features/catalog/presentation/bloc/product_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<ProductBloc>(
             create: (BuildContext context) =>
-                ProductBloc()..add(ProductsLoadEvent()),
+                ProductBloc(ProductRepositoryImpl())..add(ProductsLoadEvent()),
           ),
           BlocProvider<CartBloc>(
             create: (BuildContext context) => CartBloc(),

@@ -1,4 +1,3 @@
-import 'package:digifood/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:digifood/features/catalog/presentation/bloc/product_bloc.dart';
 import 'package:digifood/features/catalog/presentation/screen/product_card.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +46,5 @@ class CatalogPage extends StatelessWidget {
         child: const Icon(Icons.shopping_cart),
       ),
     );
-    ;
   }
 }

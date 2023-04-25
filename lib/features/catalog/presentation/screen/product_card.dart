@@ -127,7 +127,6 @@ class ProductCard extends StatelessWidget {
           ),
         );
       }
-      ;
       return Container();
     });
   }

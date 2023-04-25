@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:digifood/features/catalog/data/model/product.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -20,7 +21,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(CartLoading());
     cartItems.update(event.product, (value) => value + 1, ifAbsent: () => 1);
     computePrice(event);
-    emit(CartLoaded(cartItems, totalPrice));
+    emit(CartLoaded(
+        cartItems.map((key, value) => MapEntry(key, value)), totalPrice));
   }
 
   Future<void> removeFromCart(
@@ -34,7 +36,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
     cartItems.removeWhere((key, value) => value == 0);
     computePrice(event);
-    emit(CartLoaded(cartItems, totalPrice));
+    emit(CartLoaded(
+        cartItems.map((key, value) => MapEntry(key, value)), totalPrice));
   }
 
   void computePrice(CartEvent event) {

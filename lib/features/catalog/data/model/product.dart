@@ -1,9 +1,10 @@
 import 'package:digifood/features/catalog/data/entity/product_entity.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:equatable/equatable.dart';
 
 enum Categories { salt, sugar, food, drink, alcohol, soft, other }
 
-class Product {
+class Product extends Equatable {
   final String id;
   final String name;
   final String imageURL;
@@ -23,8 +24,9 @@ class Product {
       required this.tva,
       required this.categories});
 
+  @override
   List<Object?> get props =>
-      [name, imageURL, description, priceATI, priceWT, tva, categories];
+      [id, name, imageURL, description, priceATI, priceWT, tva, categories];
 
   static Product empty = const Product(
     id: 'Inconnu(e)',
